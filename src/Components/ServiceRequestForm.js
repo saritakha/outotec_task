@@ -54,6 +54,7 @@ class ServiceRequestForm extends React.Component{
                     name="requestType"
                     value={this.state.requestType}
                     onChange={this.handleChange}  
+                    required
                   >   
                     <option  className="placeholder" selected disabled value="">Select</option> 
                     <option value="audit">Audit</option>
@@ -87,7 +88,8 @@ class ServiceRequestForm extends React.Component{
                <select
                  name="priority"
                  value={this.state.priority}
-                 onChange={this.handleChange}  
+                 onChange={this.handleChange} 
+                 required 
              >   
                  <option  className="placeholder"  disabled value="">Select</option> 
                  <option value="low">Low</option>

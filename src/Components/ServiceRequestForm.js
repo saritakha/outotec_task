@@ -18,8 +18,14 @@ class ServiceRequestForm extends React.Component{
     handleChange = (event) => {
         const {name, value } =  event.target;
         this.setState({[name]:value})
-    } 
+    }  
 
+    componentDidUpdate(){
+      fetch("http://localhost:5000/api/services")
+      .then(res => res.json())
+   }
+
+   
     onSubmit = (e) => {
       // get our form data out of state
       const { requestName, requestType, id, description, priority, status} = this.state;
@@ -28,9 +34,6 @@ class ServiceRequestForm extends React.Component{
         .then((result) => {
           alert(result.data);
         });
-
-
-        e.preventDefault();
      }
 
     render(){

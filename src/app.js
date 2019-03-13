@@ -8,56 +8,52 @@ class App extends Component {
   constructor(){
     super();
     this.state={
-      servicerequests: []
+      servicerequests: [],
+      nonfiltered: []
     }
   }
 
 componentDidMount(){
-   fetch("http://localhost:5000/api/services")
-   .then(res => res.json())
-   .then(data =>this.onLoading(data));
+   this.onLoading()
 }
 
-onLoading = (data) => {
-   this.setState({servicerequests:data})
+onLoading = () => {
+  fetch("http://localhost:5000/api/services")
+   .then(res => res.json())
+   .then(data =>this.setState({
+     servicerequests: data,
+     nonfiltered: data
+    }))
    }
-
-// componentDidUpdate(){
-//     fetch("http://localhost:5000/api/services")
-//     .then(res => res.json())
-//     .then(data =>this.onLoading(data));
-//  }
 
 handleChange = (event) => {
-  const SearchStr = event.target.value
-  const requests = [...this.state.servicerequests]
-  const filterList = [];
-  
-   requests.filter( service => {
-   if( service.requestName.includes(SearchStr)){
-     filterList.push(service);
-   }
-  })
-   console.log(filterList);
-   console.log(filterList.length); 
+  const SearchStrg = event.target.value;
+  let filterList = [];
 
-   if(filterList.length>=0 && SearchStr!= null){
-     <Main  servicerequests = {filterList}/>
-   }
-   else if(SearchStr== null){
-    <Main  servicerequests = {requests}/>
-   }
+     if(SearchStrg) {
+      this.state.servicerequests.filter( service => {
+        if(service.requestName.includes(SearchStrg)){ 
+          filterList.push(service);
+        }
+      })
 
-  //  if(filterList.length>=0 && SearchStr!= null){
-  //   this.setState({
-  //       servicerequests:filterList
-  //   })
-  // }
-  // else if(SearchStr== null){
-  //  this.setState({
-  //    servicerequests:requests
-  //  })
-  // }
+          if(filterList.length > 0){ 
+           this.setState({
+            servicerequests:filterList
+          })
+        }
+           else{
+            this.setState({
+             servicerequests:[]
+        })
+       }
+     } 
+     else {
+      this.setState({
+        servicerequests:this.state.nonfiltered
+      })
+     }
+
 } 
        
   render() {

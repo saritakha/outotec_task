@@ -4,8 +4,6 @@ import Main from './Main';
 
   
 const FilterForm = (props) => {
-  
-
     return(
         <Form className="filter">
           <h5>FILTER</h5>

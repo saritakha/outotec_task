@@ -1,102 +1,62 @@
-.App {
-    text-align: center;
-  }
+
   
-  .App-header {
-    background-color: #222;
-    height: 60px;
-    padding: 20px;
-    color: white;
-  }
-  
-  .App-title {
-    font-size: 1.5em;
-  }
-  
-  .App-intro {
-    font-size: large;
-  }
+header{
+  border-bottom: 3px solid #DCDCDC;
+}
 
+.servicerequest{
+  border-bottom: 4px solid #DCDCDC;
+  margin: 5px;
+  padding: 10px;
+  position: relative;
+}
 
+.username{
+  border-left: 1px solid #DCDCDC;
+  margin: 5px;
+}
 
-.map-name-container {
-    overflow: visible !important;
-  }
-   
-  .map-name-marker {
-    position: absolute;
-    font-family: 'Helvetica';
-    left: -37px;
-    top: -25px;
-    width: 70px;
-    height: 20px;
-    border-radius: 3px;
-    line-height: 22px;
-    background-color: white;
-    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.07);
-    text-align: center;
-    color: black;
-    font-size: 12px;
-    font-weight: 700;
-    border: 1px solid gray;
-    z-index: 1;
-  }
-  .map-name-marker:before,
-  .map-name-marker:after {
-    position: absolute;
-    content: "";
-    border-style: solid;
-  }
-   
-  .map-name-marker:after {
-    left: 31px;
-    top: 19px;
-    border-width: 5px;
-    border-color: white transparent transparent;
-  }
-   
-  .map-name-marker:before {
-    left: 30px;
-    top: 20px;
-    border-width: 6px;
-    border-color: gray transparent transparent;
-  }
-   
-  .map-name-marker.visited:hover {
-    background-color: #7b8d93;
-    color: #fff;
-    border-color: #5b6a6f;
-  }
-   
-  .map-name-marker.visited:hover:after {
-    border-color: #7b8d93 transparent transparent;
-  }
-   
-  .map-name-marker.visited:hover:before {
-    border-color: #5b6a6f transparent transparent;
-  }
-   
-  .map-name-marker:hover {
-    background-color: #f2f2f2;
-    color: black;
-    border-color: gray;
-    z-index: 3;
-  }
-   
-  .map-name-marker:hover:after {
-    border-color: #f2f2f2 transparent transparent;
-  }
-   
-  .map-name-marker:hover:before {
-    border-color: gray transparent transparent;
-  }
+table{
+  margin: 20px;
+}
 
-  .anyClass {
-    height:600px;
-    overflow-y: scroll;
-  }
+th{
+  border-bottom: 1px solid gray;
+  margin: 20px;
+}
 
-  .w-100 {
-    max-height: 280px;
-    min-width: 180px;
-  }
+td{
+  border-bottom: 2px solid #DCDCDC;
+}
+
+th, td {
+  padding-right: 90px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.filter{
+background-color: #C8C8C8;
+height: 100vh;
+padding-left: 15%; 
+padding-top: 10%;
+}
+
+label{
+  font-size: 15px;
+}
+
+ .modalForm{
+   position: absolute;
+   z-index: 50;
+   background-color: #C8C8C8;
+   margin: -50px;
+   width: 110%;
+   padding: 40px;
+   height: 80vh;
+ }
+
+ .main{ 
+   position: relative;
+   z-index: 10;
+ }

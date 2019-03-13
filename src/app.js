@@ -1,16 +1,35 @@
 import React, { Component } from 'react';
-import Main from './components/Main';
+import Header from './Components/Header';
+import Main from './Components/Main';
+import Filter from './Components/Filter';
 import './App.css';
 
 class App extends Component {
+  constructor() {
+      super();
+      this.state = {
+         filterData: ""
+      }
+    }
+
+  componentDidMount(){
+    setTimeout(() => {
+      this.setState({filterData: "Search"})
+    },1000)
+  }
+  
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <h1 className="App-title"><em>TourFlow</em></h1>
-        </header>
-        <div>
-        <Main />
+        <Header />
+        <div className= "row">
+           <div className= "col col-md-2">
+             <Filter />
+           </div>
+           <div className= "col col-md-10 main">
+             <Main />
+           </div>
         </div>
       </div>
     );

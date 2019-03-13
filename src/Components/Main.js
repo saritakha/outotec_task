@@ -1,61 +1,34 @@
 import React from 'react';
 import ServiceRequest from './ServiceRequest';
+import ServiceRequestForm from './ServiceRequestForm';
 
 class Main extends React.Component {
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
         this.state= {
-            servicerequests: []
+            isFormOpen: false
         }
     }
 
-    componentDidMount(){
-        fetch("http://localhost:5000/api/services")
-        .then(res => res.json())
-        .then(data =>{
-          let services = data.map(service =>{
-           return(
-            <tr key={service.id}>
-            <td>{service.date}</td>
-            <td>{service.requestName}</td>
-            <td>{service.requestType}</td>
-            <td>{service.id}</td>
-            <td>{service.description}</td>
-            <td>{service.priority}</td>
-            <td>{service.status}</td>
-           </tr>
-           ) 
-          })
-         this.setState({servicerequests:services})
-        })
-    }
-
-    componentDidUpdate(){
-        fetch("http://localhost:5000/api/services")
-        .then(res => res.json())
-        .then(data =>{
-          let services = data.map(service =>{
-           return(
-            <tr key={service.id}>
-            <td>{service.date}</td>
-            <td>{service.requestName}</td>
-            <td>{service.requestType}</td>
-            <td>{service.id}</td>
-            <td>{service.description}</td>
-            <td>{service.priority}</td>
-            <td>{service.status}</td>
-           </tr>
-           ) 
-          })
-         this.setState({servicerequests:services})
-        })
-    }
-
+    handleForm= () => {
+            this.setState({
+              isFormOpen: !this.state.isFormOpen
+            });      
+        }
 
     render(){
+       const { servicerequests } = this.props;
+
+       return servicerequests ? this.renderData(servicerequests) : this.renderLoading
+    }
+
+    renderData = (data) =>{
         return(
             <div>
-            <ServiceRequest/> 
+            <ServiceRequest open={this.handleForm}/> 
+
+              {this.state.isFormOpen? <ServiceRequestForm  close={this.handleForm}/>:null}
+
             <table>
               <tbody>
                 <tr>
@@ -67,13 +40,31 @@ class Main extends React.Component {
                     <th>Priority</th>
                     <th>Status</th>
                 </tr>
-              {this.state.servicerequests}
+            {data.map(service =>{
+                  return(
+                   <tr key={service.id}>
+                     <td>{service.date}</td>
+                     <td>{service.requestName}</td>
+                     <td>{service.requestType}</td>
+                     <td>{service.id}</td>
+                     <td>{service.description}</td>
+                     <td>{service.priority}</td>
+                     <td>{service.status}</td>
+                   </tr>
+                         ) 
+                        })
+        }
                
               </tbody>
          </table>
-            </div>
+     </div>
         )
     }
+
+    renderLoading = () => {
+        <h1>loading........</h1>
+    }
 }
+
 
 export default Main;

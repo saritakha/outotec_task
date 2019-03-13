@@ -16,9 +16,9 @@ const serviceSchema = new Schema({
         required: true
     },
     id: {
-        type: Number,
-        required: true,
-        unique: true
+         type: Number,
+         required: true,
+         unique: true
     },
     description: String,
     priority: {

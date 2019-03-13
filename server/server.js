@@ -22,8 +22,13 @@ app.get('/api/services', (req,res) => {
     })
 })
 
-app.post('/api/services', (req, res) => {
-    Service.create({
+app.post('/api/services',async  (req, res) => {
+  
+  const service=await Service.find({id: req.body.id})
+  console.log(service);
+  if(service.length>0) return res.send('This id is already registered')
+   
+  await Service.create({
       date: Date.now(),
       requestName: req.body.requestName,
       requestType: req.body.requestType,
@@ -32,9 +37,8 @@ app.post('/api/services', (req, res) => {
       priority: req.body.priority,
       status: req.body.status
     })
-    .then(service => {
-      res.json(service)
-    });
+   
+    res.send('Request Created Sucessfully')
   });
 
   mongoose.connect(url, {useNewUrlParser:true},function (err, db) {

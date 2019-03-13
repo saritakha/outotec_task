@@ -1,23 +1,43 @@
 import React, { Component } from 'react';
 import Header from './Components/Header';
 import Main from './Components/Main';
-import Filter from './Components/Filter';
+import FilterForm from './Components/FilterForm';
 import './App.css';
 
 class App extends Component {
-  constructor() {
-      super();
-      this.state = {
-         filterData: ""
-      }
+  constructor(){
+    super();
+    this.state={
+      servicerequests: [],
+      SearchStr:'',
+      filterList:[],
     }
-
-  componentDidMount(){
-    setTimeout(() => {
-      this.setState({filterData: "Search"})
-    },1000)
   }
-  
+
+componentDidMount(){
+   fetch("http://localhost:5000/api/services")
+   .then(res => res.json())
+   .then(this.onLoading);
+}
+
+componentDidUpdate(){
+   fetch("http://localhost:5000/api/services")
+   .then(res => res.json())
+   .then(this.onLoading);
+}
+
+onLoading = (data) => {
+   this.setState({servicerequests:data})
+   }
+
+handleChange = (event) => {
+    this.setState({SearchStr: event.target.value})
+    this.state.servicerequests.filter(service => 
+      service.requestName.includes(this.state.SearchStr)).map(service =>
+       { this.state.filterList.push(service)})
+     {<Main  servicerequests= {this.state.filterList}/>}
+}    
+
 
   render() {
     return (
@@ -25,10 +45,10 @@ class App extends Component {
         <Header />
         <div className= "row">
            <div className= "col col-md-2">
-             <Filter />
+             <FilterForm handleChange={this.handleChange}/>
            </div>
            <div className= "col col-md-10 main">
-             <Main />
+             <Main  servicerequests= {this.state.servicerequests}/>
            </div>
         </div>
       </div>
